@@ -18,6 +18,7 @@ public class Negotiation {
 
 		try {
 			// bwllaaaaaaa
+			// norwell dhk heku heku hkue 
 			String[] inSu200 = new String[4];
 			String[] inCu200 = new String[4];
 			inSu200[0] = "Project_Negotation/data/daten3ASupplier_200.txt";
