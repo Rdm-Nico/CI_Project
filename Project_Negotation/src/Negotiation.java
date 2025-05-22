@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 // IT IS ONLY ALLOWED TO PRINT THESE OBJECTIVE-VALUES IN THE CONSOLE FOR ANALYZING REASONS
 // this is for testing github 
 
-
 public class Negotiation {
 	// Parameter of negotiation
 	public static int maxRounds = 10;
@@ -18,6 +17,7 @@ public class Negotiation {
 		boolean voteA, voteB;
 
 		try {
+			// bwllaaaaaaa
 			String[] inSu200 = new String[4];
 			String[] inCu200 = new String[4];
 			inSu200[0] = "Project_Negotation/data/daten3ASupplier_200.txt";
