@@ -1,5 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.logging.Logger;
+
+import utils.Log;
 
 // DO NOT USE EVALUATE-FUNCTIONS OF AGENTS WITHIN MEDIATOR OR NEGOTIATION!
 // THESE OBLECTIVE-VALUES ARE NOT AVAILABLE IN REAL NEGOTIATIONS!!!!!!!!!!!!!!!!!!!!  
@@ -9,6 +12,7 @@ import java.io.FileNotFoundException;
 public class Negotiation {
 	// Parameter of negotiation
 	public static int maxRounds = 10;
+	private static final Logger logger = new Log().InitLog();
 
 	public static void main(String[] args) {
 		int[] contract, proposal;
@@ -17,8 +21,7 @@ public class Negotiation {
 		boolean voteA, voteB;
 
 		try {
-			// bwllaaaaaaa
-			// norwell dhk heku heku hkue 
+			// upload data
 			String[] inSu200 = new String[4];
 			String[] inCu200 = new String[4];
 			inSu200[0] = "Project_Negotation/data/daten3ASupplier_200.txt";
@@ -32,7 +35,7 @@ public class Negotiation {
 
 			for (int i = 0; i < inSu200.length; i++) {
 				for (int j = 0; j < inCu200.length; j++) {
-					System.out.println("Instance: " + i + " " + j);
+					logger.info("Instance: " + i + " " + j + "\n");
 					agA = new SupplierAgent(new File(inSu200[i]));
 					agB = new CustomerAdvanced(new File(inCu200[j]));
 					med = new Mediator(agA.getContractSize(), agB.getContractSize());
@@ -50,16 +53,18 @@ public class Negotiation {
 					}
 				}
 			}
+
+			// logger.close();
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
 	public static void output(Agent a1, Agent a2, int i, int[] contract) {
-		System.out.print(i + " -> ");
-		a1.printUtility(contract);
-		System.out.print("  ");
-		a2.printUtility(contract);
-		System.out.println();
+		logger.info(i + " -> ");
+		a1.printUtility(contract, logger);
+		logger.info("  ");
+		a2.printUtility(contract, logger);
+		logger.info("\n");
 	}
 }

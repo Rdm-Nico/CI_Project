@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class CustomerAdvanced extends Agent {
 
@@ -41,8 +42,8 @@ public class CustomerAdvanced extends Agent {
 		return timeMatrix.length;
 	}
 
-	public void printUtility(int[] contract) {
-		System.out.print(evaluate(contract));
+	public void printUtility(int[] contract, Logger logger) {
+		logger.info(Integer.toString(evaluate(contract)));
 	}
 
 	private void calculateDelay(int jobNr) {

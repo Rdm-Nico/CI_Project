@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class SupplierAgent extends Agent {
 
@@ -35,8 +36,8 @@ public class SupplierAgent extends Agent {
 		return costMatrix.length;
 	}
 
-	public void printUtility(int[] contract) {
-		System.out.print(evaluate(contract));
+	public void printUtility(int[] contract, Logger logger) {
+		logger.info(Integer.toString(evaluate(contract)));
 	}
 
 	private int evaluate(int[] contract) {
