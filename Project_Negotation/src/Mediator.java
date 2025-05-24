@@ -10,7 +10,7 @@ public class Mediator {
 		}
 		this.contractSize = contractSizeA;
 	}
-
+// Part for Generate list of contracts at the beginning (David)
 	public int[] initContract() {
 		int[] contract = new int[contractSize];
 		for (int i = 0; i < contractSize; i++)
@@ -28,7 +28,7 @@ public class Mediator {
 		return contract;
 	}
 
-	// Two Mutation-Operators (Swap, Shift)
+	// Two Mutation-Operators (Swap, Shift) (Norwell)
 	public int[] constructProposal_SWAP(int[] contract) {
 		int[] proposal = new int[contract.length];
 		for (int i = 0; i < proposal.length; i++)
@@ -98,3 +98,5 @@ public class Mediator {
 		return proposal;
 	}
 }
+
+// Part for Selections (Nicolo)
