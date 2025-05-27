@@ -135,15 +135,80 @@ public class Mediator {
 		return selected;
 	}
 
-	// public int[][] mue_plus_lamba_selection(int[][] pop_contract) {
-	// // method for do a mue + lambda selection of the population of contracts
-	// // @return a new population of contracts
-	// }
+	public int[][] mue_lamba_selection(int[][] pop_contract, int mue, int lambda) {
+		// method for do a (mue,lambda) selection of the population of contracts
+		// @return a new population of contracts
 
-	// public int[][] temperature_based_selection(int[][] pop_contract) {
-	// // method for do a temperature based selection of the population of contracts
-	// // @return a new population of contracts
-	// }
+		// set up selected population
+		int[][] selected = new int[mue][pop_contract[0].length];
+
+		// generate lambda offsrping from parents
+		// TODO modify with the correct implementation of crossover methods
+		int[][] offspring = new int[lambda][pop_contract[0].length];
+
+		// TODO do fitness calculation of the offspring
+
+		// select only the best mue best offspring
+
+		// Take the first mue individuals
+		for (int i = 0; i < mue; i++) {
+			selected[i] = offspring[i].clone();
+		}
+		return selected;
+	}
+
+	public int[][] temperature_based_selection(int[][] pop_contract, int[] fitness, int selection_size,
+			double temparature) {
+		// method for do a temperature based selection of the population of contracts
+		// @return a new population of contracts
+
+		// set up selected population
+		int[][] selected = new int[selection_size][pop_contract[0].length];
+		// set up the probabilities
+		double[] probs = new double[pop_contract.length];
+
+		// compute the selection probability for individual i based on softmax-like
+		// function
+		// compute the denominator
+		double denominator = 0;
+		for (int i = 0; i < pop_contract.length; i++) {
+			denominator += Math.exp(fitness[i] / temparature);
+		}
+
+		// compute for each individual the probs
+		for (int i = 0; i < pop_contract.length; i++) {
+			probs[i] = Math.exp(fitness[i] / temparature) / denominator;
+		}
+		// choose random contracts based on rank
+		// create a vector for make sure to select only the individual one time
+		boolean[] isfree = new boolean[pop_contract.length];
+		Arrays.fill(isfree, true);
+
+		for (int i = 0; i < selection_size; i++) {
+			double value = Math.random();
+			double current = 0;
+			int win_index = 0;
+			for (int j = 0; j < pop_contract.length; j++) {
+				if (value >= current && value <= current + probs[j]) {
+					// we save the index
+					win_index = j;
+					break;
+				}
+				current += probs[j];
+			}
+			// peak the individual if we didnt alredy peak
+			if (isfree[win_index]) {
+				selected[i] = pop_contract[win_index];
+				// we make unselectable the individual
+				isfree[win_index] = false;
+			} else {
+				// we continue to search by decresing the index
+				i--;
+			}
+
+		}
+		return selected;
+	}
 
 	public void check(int[] proposal) {
 		// we check that the sum of the elements stay the same

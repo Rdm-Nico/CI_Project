@@ -39,25 +39,6 @@ public class Negotiation {
 					agA = new SupplierAgent(new File(inSu200[i]));
 					agB = new CustomerAdvanced(new File(inCu200[j]));
 					med = new Mediator(agA.getContractSize(), agB.getContractSize());
-
-					// TODO Example for selection
-					int[] contract_1 = { 10, 5, 3, 1, 4 };
-					int[] contract_2 = { 10, 5, 4, 2, 4 };
-					int[] contract_3 = { 10, 2, 4, 1, 4 };
-					int[] contract_4 = { 1, 5, 4, 1, 4 };
-
-					int[][] pop_contract = {contract_1, contract_2, contract_3, contract_4};
-
-					int[][] ris = med.rank_selection(pop_contract, 2);
-
-					
-
-
-
-
-
-
-
 					contract = med.initContract(); // Vertrag=Lsung=Jobliste
 					output(agA, agB, 0, contract);
 
