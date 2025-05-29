@@ -97,6 +97,69 @@ public class Mediator {
 		}
 		return proposal;
 	}
+
+	// New method to calculate fitness score for a contract
+	public double calculateFitnessScore(int[] contract, Agent agentA, Agent agentB) {
+		int[] dummyContract = new int[contractSize];
+		for (int j = 0; j < contractSize; j++) {
+			dummyContract[j] = j; // Sequential contract as baseline
+		}
+	
+		int score = 0;
+		if (agentA.vote(dummyContract, contract)) score++;
+		if (agentB.vote(dummyContract, contract)) score++;
+
+		// Map vote count to fitness score
+		return switch (score) {
+		case 2 -> 1.0;
+		case 1 -> 0.5;
+		default -> 0.0;
+		};
+	}
+
+	// New method to generate and rank multiple contracts (David)
+	public int[][] generateRankedContract(Agent agentA, Agent agentB) {
+		final int NUM_CONTRACTS = 10;
+		int[][] contracts = new int[NUM_CONTRACTS][contractSize];
+		double[] voteScores = new double[NUM_CONTRACTS];
+		double[] fitnessScores = new double[NUM_CONTRACTS];
+	
+		// Generate contracts and vote-based scores
+		for (int i = 0; i < NUM_CONTRACTS; i++) {
+			contracts[i] = initContract();
+			voteScores[i] = calculateFitnessScore(contracts[i], agentA, agentB); // returns 0–2
+		}
+	
+		// Sort contracts based on voteScores (descending: 2 -> 1 -> 0)
+		for (int i = 0; i < NUM_CONTRACTS - 1; i++) {
+			for (int j = 0; j < NUM_CONTRACTS - i - 1; j++) {
+				if (voteScores[j] < voteScores[j + 1]) {
+					// Swap vote scores
+					double tempScore = voteScores[j];
+					voteScores[j] = voteScores[j + 1];
+					voteScores[j + 1] = tempScore;
+	
+					// Swap contracts
+					int[] tempContract = contracts[j];
+					contracts[j] = contracts[j + 1];
+					contracts[j + 1] = tempContract;
+				}
+			}
+		}
+	
+		// Assign fitness scores: top = 1.0, middle = 0.5, others = 0.0
+		for (int i = 0; i < NUM_CONTRACTS; i++) {
+			if (i == 0)
+				fitnessScores[i] = 1.0;
+			else if (i == 1)
+				fitnessScores[i] = 0.5;
+			else
+				fitnessScores[i] = 0.0;
+		}
+	
+		return contracts;
+	}
+	
 }
 
 // Part for Selections (Nicolo)

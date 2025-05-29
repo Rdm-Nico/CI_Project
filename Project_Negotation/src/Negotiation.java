@@ -39,7 +39,11 @@ public class Negotiation {
 					agA = new SupplierAgent(new File(inSu200[i]));
 					agB = new CustomerAdvanced(new File(inCu200[j]));
 					med = new Mediator(agA.getContractSize(), agB.getContractSize());
-					contract = med.initContract(); // Vertrag=Lsung=Jobliste
+
+					// Get all ranked contracts
+					int[][] rankedContracts = med.generateRankedContract(agA, agB);
+					// Use the best contract (first one) for the negotiation
+					contract = rankedContracts[0];
 					output(agA, agB, 0, contract);
 
 					for (int round = 1; round < maxRounds; round++) { // Mediator
