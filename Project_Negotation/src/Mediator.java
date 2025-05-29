@@ -97,7 +97,7 @@ public class Mediator {
 		int[][] selected = new int[selection_size][pop_contract[0].length];
 
 		// associate rank to contract
-		// TODO here is more efficient if the population of cotracts is already ordered
+		// TODO: here is more efficient if the population of cotracts is already ordered
 		// based on fitness
 		// supp that that the list is ordered based on descending fitness
 		// for(int i = 0; i < rank_list.length; i++){
@@ -132,6 +132,8 @@ public class Mediator {
 
 		}
 
+		// TODO: the selected list is not ordered based on fitness
+
 		return selected;
 	}
 
@@ -143,10 +145,10 @@ public class Mediator {
 		int[][] selected = new int[mue][pop_contract[0].length];
 
 		// generate lambda offsrping from parents
-		// TODO modify with the correct implementation of crossover methods
+		// TODO: modify with the correct implementation of crossover methods
 		int[][] offspring = new int[lambda][pop_contract[0].length];
 
-		// TODO do fitness calculation of the offspring
+		// TODO: do fitness calculation of the offspring
 
 		// select only the best mue best offspring
 
@@ -154,6 +156,7 @@ public class Mediator {
 		for (int i = 0; i < mue; i++) {
 			selected[i] = offspring[i].clone();
 		}
+
 		return selected;
 	}
 
@@ -207,6 +210,8 @@ public class Mediator {
 			}
 
 		}
+
+		// TODO: the selected list is not ordered based on fitness
 		return selected;
 	}
 
