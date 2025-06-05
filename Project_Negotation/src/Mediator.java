@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Arrays;
 
 public class Mediator {
 
@@ -10,7 +11,8 @@ public class Mediator {
 		}
 		this.contractSize = contractSizeA;
 	}
-// Part for Generate list of contracts at the beginning (David)
+
+	// Part for Generate list of contracts at the beginning (David)
 	public int[] initContract() {
 		int[] contract = new int[contractSize];
 		for (int i = 0; i < contractSize; i++)
@@ -75,6 +77,135 @@ public class Mediator {
 		}
 		check(proposal);
 		return proposal;
+	}
+
+	public int[][] rank_selection(int[][] pop_contract, int selection_size) {
+		// method for do a rank selection of the population contracts
+		// @return a new population of contracts
+
+		// set up the rank list
+		double[] rank_list = new double[pop_contract.length];
+		int sum = 0;
+		for (int i = rank_list.length; i > 0; i--) {
+			rank_list[rank_list.length - i] = i;
+			sum += i;
+		}
+		for (int i = 0; i < rank_list.length; i++) {
+			rank_list[i] /= sum;
+		}
+		// set up the selected population
+		int[][] selected = new int[selection_size][pop_contract[0].length];
+
+		// choose random contracts based on rank
+		// create a vector for make sure to select only the individual one time
+		boolean[] isfree = new boolean[pop_contract.length];
+		Arrays.fill(isfree, true);
+
+		for (int i = 0; i < selection_size; i++) {
+			double value = Math.random();
+			double current = 0;
+			int win_index = 0;
+			for (int j = 0; j < pop_contract.length; j++) {
+				if (value >= current && value <= current + rank_list[j]) {
+					// we save the index
+					win_index = j;
+					break;
+				}
+				current += rank_list[j];
+			}
+			// peak the individual if we didnt alredy peak
+			if (isfree[win_index]) {
+				selected[i] = pop_contract[win_index];
+				// we make unselectable the individual
+				isfree[win_index] = false;
+			} else {
+				// we continue to search by decresing the index
+				i--;
+			}
+
+		}
+
+		// TODO: the selected list is not ordered based on fitness
+
+		return selected;
+	}
+
+	public int[][] mue_lamba_selection(int[][] pop_contract, int mue, int lambda) {
+		// method for do a (mue,lambda) selection of the population of contracts
+		// @return a new population of contracts
+
+		// set up selected population
+		int[][] selected = new int[mue][pop_contract[0].length];
+
+		// generate lambda offsrping from parents
+		// TODO: modify with the correct implementation of crossover methods
+		int[][] offspring = new int[lambda][pop_contract[0].length];
+
+		// TODO: do fitness calculation of the offspring
+
+		// select only the best mue best offspring
+
+		// Take the first mue individuals
+		for (int i = 0; i < mue; i++) {
+			selected[i] = offspring[i].clone();
+		}
+
+		return selected;
+	}
+
+	public int[][] temperature_based_selection(int[][] pop_contract, int[] fitness, int selection_size,
+			double temparature) {
+		// method for do a temperature based selection of the population of contracts
+		// @return a new population of contracts
+
+		// set up selected population
+		int[][] selected = new int[selection_size][pop_contract[0].length];
+		// set up the probabilities
+		double[] probs = new double[pop_contract.length];
+
+		// compute the selection probability for individual i based on softmax-like
+		// function
+		// compute before the denominator
+		double denominator = 0;
+		for (int i = 0; i < pop_contract.length; i++) {
+			denominator += Math.exp(fitness[i] / temparature);
+		}
+
+		// compute for each individual the probs
+		for (int i = 0; i < pop_contract.length; i++) {
+			probs[i] = Math.exp(fitness[i] / temparature) / denominator;
+		}
+		// choose random contracts based on rank
+		// create a vector for make sure to select only the individual one time
+		boolean[] isfree = new boolean[pop_contract.length];
+		Arrays.fill(isfree, true);
+
+		for (int i = 0; i < selection_size; i++) {
+			double value = Math.random();
+			double current = 0;
+			int win_index = 0;
+			for (int j = 0; j < pop_contract.length; j++) {
+				if (value >= current && value <= current + probs[j]) {
+					// we save the index
+					win_index = j;
+					break;
+				}
+				current += probs[j];
+			}
+			// peak the individual if we didnt alredy peak
+			if (isfree[win_index]) {
+				selected[i] = pop_contract[win_index];
+				// we make unselectable the individual
+				isfree[win_index] = false;
+			} else {
+				// we continue to search by decresing the index
+				i--;
+			}
+
+		}
+
+		// TODO: the selected list is not ordered based on fitness
+		return selected;
 	}
 
 	public void check(int[] proposal) {
