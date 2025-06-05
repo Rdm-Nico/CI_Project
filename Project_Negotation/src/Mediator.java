@@ -96,13 +96,6 @@ public class Mediator {
 		// set up the selected population
 		int[][] selected = new int[selection_size][pop_contract[0].length];
 
-		// associate rank to contract
-		// TODO: here is more efficient if the population of cotracts is already ordered
-		// based on fitness
-		// supp that that the list is ordered based on descending fitness
-		// for(int i = 0; i < rank_list.length; i++){
-		// }
-
 		// choose random contracts based on rank
 		// create a vector for make sure to select only the individual one time
 		boolean[] isfree = new boolean[pop_contract.length];
@@ -172,7 +165,7 @@ public class Mediator {
 
 		// compute the selection probability for individual i based on softmax-like
 		// function
-		// compute the denominator
+		// compute before the denominator
 		double denominator = 0;
 		for (int i = 0; i < pop_contract.length; i++) {
 			denominator += Math.exp(fitness[i] / temparature);
