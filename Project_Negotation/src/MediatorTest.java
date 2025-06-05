@@ -42,12 +42,12 @@ public class MediatorTest {
         int i = j + 1;
         int count = 0;
         int[][] new_pop = new int[10][contractSize];
-        while(count == rankedContracts.length){
-            int[][] childrens = mediator.oderCrossover(selectedContracts[j], rankedContracts[i], 3);
+        while (count != rankedContracts.length) {
+            int[][] childrens = mediator.oderCrossover(selectedContracts[j], selectedContracts[i], 3);
             // mutation here
-            new_pop[count++] =childrens[0];
-            new_pop[count++] =childrens[1];
-            if(i == selectedContracts.length){
+            new_pop[count++] = childrens[0];
+            new_pop[count++] = childrens[1];
+            if (i == selectedContracts.length - 1) {
                 j++;
                 i = j;
             }
@@ -55,6 +55,7 @@ public class MediatorTest {
         }
 
         System.out.println("New population after selection and crossover:");
+        new_pop = mediator.sorted_Contract(new_pop, agentA, agentB);
         // print
         for (i = 0; i < new_pop.length; i++) {
             double fitness = mediator.calculateFitnessScore(new_pop[i], agentA, agentB);
@@ -68,9 +69,9 @@ public class MediatorTest {
         System.out.print("[");
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i]);
-            if (i < array.length - 1) System.out.print(", ");
+            if (i < array.length - 1)
+                System.out.print(", ");
         }
         System.out.print("]");
     }
 }
-
