@@ -28,6 +28,40 @@ public class MediatorTest {
             printArray(rankedContracts[i]);
             System.out.printf(" => Fitness: %.2f\n", fitness);
         }
+
+        // Feeding input to selection methods
+        System.out.println("\nFeeding input to selection methods");
+        int[][] selectedContracts = mediator.rank_selection(rankedContracts, contractSize);
+        for (int i = 0; i < selectedContracts.length; i++) {
+            double fitness = mediator.calculateFitnessScore(selectedContracts[i], agentA, agentB);
+            System.out.print("Selected " + (i + 1) + ": ");
+            printArray(selectedContracts[i]);
+            System.out.printf(" => Fitness: %.2f\n", fitness);
+        }
+        int j = 0;
+        int i = j + 1;
+        int count = 0;
+        int[][] new_pop = new int[10][contractSize];
+        while(count == rankedContracts.length){
+            int[][] childrens = mediator.oderCrossover(selectedContracts[j], rankedContracts[i], 3);
+            // mutation here
+            new_pop[count++] =childrens[0];
+            new_pop[count++] =childrens[1];
+            if(i == selectedContracts.length){
+                j++;
+                i = j;
+            }
+            i++;
+        }
+
+        System.out.println("New population after selection and crossover:");
+        // print
+        for (i = 0; i < new_pop.length; i++) {
+            double fitness = mediator.calculateFitnessScore(new_pop[i], agentA, agentB);
+            System.out.print("Rank " + (i + 1) + ": ");
+            printArray(new_pop[i]);
+            System.out.printf(" => Fitness: %.2f\n", fitness);
+        }
     }
 
     public static void printArray(int[] array) {
@@ -39,3 +73,4 @@ public class MediatorTest {
         System.out.print("]");
     }
 }
+
