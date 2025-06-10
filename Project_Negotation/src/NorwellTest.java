@@ -16,14 +16,14 @@ public class NorwellTest {
         int[] papa = {5,4,2,1,3,9,10,6,8,7};
         int[][] child;
         int[] son;
-        int[] doughter;
+        int[] daughter;
 
         //child = med.oderCrossover(mama, papa, 3);
         //child = med.positionBasedCrossover(mama, papa, 3);
         child = med.cycleCrossover(mama, papa,3);
     
         son = child[0];
-        doughter = child[1];
+        daughter = child[1];
 
 
         ////print
@@ -31,9 +31,9 @@ public class NorwellTest {
         for (int i=0; i<a; i++){
             System.out.println(son[i]);
         }
-        System.out.println("Doughter: ");
+        System.out.println("Daughter: ");
         for (int i=0; i<a; i++){
-            System.out.println(doughter[i]);
+            System.out.println(daughter[i]);
         }
         }catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
