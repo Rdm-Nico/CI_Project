@@ -6,7 +6,8 @@ import java.util.Map;
 public class TestGA {
 
     // Create Automated Testing methods
-    public static double[][] runExperiment(String selectionMethod, String crossoverMethod, String mutationMethod)
+    public static double[][] runExperiment(String selectionMethod, String crossoverMethod, String mutationMethod,
+                                           String supplierFilePath, String customerFilePath)
             throws FileNotFoundException {
 
         int maxRounds = 100;
@@ -17,8 +18,8 @@ public class TestGA {
         double alpha = 0.9;
 
         // Introduce two agents
-        File supplierFile = new File("Project_Negotation/data/daten3ASupplier_200.txt");
-        File customerFile = new File("Project_Negotation/data/daten3ACustomer_200_10.txt");
+        File supplierFile = new File(supplierFilePath);
+        File customerFile = new File(customerFilePath);
         Agent agentA = new SupplierAgent(supplierFile);
         Agent agentB = new CustomerAdvanced(customerFile);
 
