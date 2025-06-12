@@ -69,7 +69,7 @@ public class TestGA {
             int j = 0;
             int i = j + 1;
             int count = 0;
-            int[][] new_pop = new int[rankedContracts.length][contractSize];
+            int[][] new_pop = new int[rankedContracts.length][agentA.getContractSize()];
             while (count != rankedContracts.length) {
                 int[] mama = selected_contracts[j];
                 int[] papa = selected_contracts[i];
