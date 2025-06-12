@@ -41,7 +41,7 @@ public class Negotiation {
 					med = new Mediator(agA.getContractSize(), agB.getContractSize());
 
 					// Get all ranked contracts
-					int[][] rankedContracts = med.generateRankedContract(agA, agB);
+					int[][] rankedContracts = med.generateRankedContract(agA, agB,10);
 					// Use the best contract (first one) for the negotiation
 					contract = rankedContracts[0];
 					output(agA, agB, 0, contract);

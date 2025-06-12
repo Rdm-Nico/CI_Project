@@ -21,7 +21,7 @@ public class MediatorTest {
 
         // Print sorted (ranked) contracts and their fitness scores
         System.out.println("\nRanked Contracts (by fitness):");
-        int[][] rankedContracts = mediator.generateRankedContract(agentA, agentB);
+        int[][] rankedContracts = mediator.generateRankedContract(agentA, agentB, 10);
         for (int i = 0; i < rankedContracts.length; i++) {
             double fitness = mediator.calculateFitnessScore(rankedContracts[i], agentA, agentB);
             System.out.print("Rank " + (i + 1) + ": ");
