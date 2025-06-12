@@ -9,11 +9,11 @@ public class TestGA {
     public static double[][] runExperiment(String selectionMethod, String crossoverMethod, String mutationMethod)
             throws FileNotFoundException {
 
-        int maxRounds = 50;
-        int NUM_CONTRACTS = 50;
-        int selection_size = 25;
-        int array_size = 10;
-        double temperature = 10;
+        int maxRounds = 100;
+        int NUM_CONTRACTS = 100;
+        int selection_size = 50;
+        int array_size = 69;
+        double temperature = 50;
         double alpha = 0.9;
 
         // Introduce two agents
@@ -42,7 +42,12 @@ public class TestGA {
         for (int epoch = 0; epoch < maxRounds; epoch++) {
             // if necessary compute the new temperature values
             if (selectionMethod.equals("TEMPERATURE")) {
-                temperature *= alpha;
+                if(temperature < 0.1) {
+                    temperature = 0.1;
+                }
+                else {
+                    temperature *= alpha;
+                }
                 System.err.println("temperature: " + temperature);
             }
 
@@ -141,7 +146,10 @@ public class TestGA {
 
             // if necessary compute the new temperature values
             if (selectionMethod == "TEMPERATURE") {
-                temperature *= Math.pow(alpha, epoch);
+                temperature *= alpha;
+                if (temperature < 1e-6) {
+                    temperature = 1e-6;
+                }
             }
 
             // Selection Execution
