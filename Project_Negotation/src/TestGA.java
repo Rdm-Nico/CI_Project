@@ -6,11 +6,12 @@ import java.util.Map;
 public class TestGA {
 
     // Create Automated Testing methods
-    public static double [][] runExperiment(String selectionMethod, String crossoverMethod, String mutationMethod) throws FileNotFoundException {
+    public static double[][] runExperiment(String selectionMethod, String crossoverMethod, String mutationMethod)
+            throws FileNotFoundException {
 
-        int maxRounds = 100;
-        int NUM_CONTRACTS = 100;
-        int selection_size = 50;
+        int maxRounds = 50;
+        int NUM_CONTRACTS = 50;
+        int selection_size = 25;
         int array_size = 10;
         double temperature = 10;
         double alpha = 0.9;
@@ -41,7 +42,8 @@ public class TestGA {
         for (int epoch = 0; epoch < maxRounds; epoch++) {
             // if necessary compute the new temperature values
             if (selectionMethod.equals("TEMPERATURE")) {
-                temperature *= Math.pow(alpha, epoch);
+                temperature *= alpha;
+                System.err.println("temperature: " + temperature);
             }
 
             // Selection Execution
@@ -84,11 +86,10 @@ public class TestGA {
             int cost_agentB = getCostFromAgent(agentB, rankedContracts[0]);
             experiment_result[epoch][0] = cost_agentA;
             experiment_result[epoch][1] = cost_agentB;
-            }
+        }
 
         return experiment_result;
     }
-
 
     public static void main(String[] args) throws FileNotFoundException {
 

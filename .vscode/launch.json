@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "GATestRunner",
+      "request": "launch",
+      "mainClass": "GATestRunner",
+      "projectName": "CI_Project_b07df57b"
+    },
+    {
+      "type": "java",
       "name": "TestGA",
       "request": "launch",
       "mainClass": "TestGA",

@@ -94,13 +94,13 @@ public class Mediator {
 	public int[] scrambleMutation(int[] contract, int n) {
 		int randnum = (int) (Math.random() * (contractSize - n + 1));
 		int start = randnum, end = randnum + n;
-		//System.out.println("start: " + start + " end: " + end);
+		// System.out.println("start: " + start + " end: " + end);
 		List<Integer> list = new ArrayList<>();
 
 		for (int i = start; i < end; i++) {
 			list.add(contract[i]);
 		}
-		//System.out.println(list);
+		// System.out.println(list);
 		Collections.shuffle(list);
 
 		int count = 0;
@@ -118,16 +118,16 @@ public class Mediator {
 	public int[] inverseMutation(int[] contract, int n) {
 		int randnum = (int) (Math.random() * (contractSize - n + 1));
 		int start = randnum, end = randnum + n;
-		//System.out.println("start: " + start + " end: " + end);
+		// System.out.println("start: " + start + " end: " + end);
 		List<Integer> list = new ArrayList<>();
 
 		for (int i = start; i < end; i++) {
 			list.add(contract[i]);
 		}
-		//System.out.println(list);
+		// System.out.println(list);
 
 		Collections.reverse(list);
-		//System.out.println("Reversed: " + list);
+		// System.out.println("Reversed: " + list);
 
 		int count = 0;
 		for (int i = start; i < end; i++) {
@@ -144,14 +144,15 @@ public class Mediator {
 		int randnum = (int) (Math.random() * (contractSize - n + 1)); // sequence start position
 		int position = (int) (Math.random() * (contractSize - n)); // insert position
 		int start = randnum, end = randnum + n;
-		//System.out.println("start: " + start + " end: " + end + " position: " + position);
+		// System.out.println("start: " + start + " end: " + end + " position: " +
+		// position);
 		List<Integer> list = new ArrayList<>();
 		List<Integer> seq = new ArrayList<>();
 
 		for (int i = start; i < end; i++) { // put all the sequence number inside
 			seq.add(contract[i]);
 		}
-		//System.out.println("seq: " + seq);
+		// System.out.println("seq: " + seq);
 		for (int i = 0; i < contractSize; i++) { // put only the number not in seq
 			if (i >= start && i < end)
 				continue;
@@ -162,8 +163,8 @@ public class Mediator {
 			list.add(position + i, seq.get(i)); // put before the position ex: 234 -> position 1, it will put like
 												// this2[]34
 		}
-		//System.out.println("List: ");
-		//System.out.println(list);
+		// System.out.println("List: ");
+		// System.out.println(list);
 
 		// put them into contract
 		for (int i = 0; i < contractSize; i++) {
@@ -333,7 +334,7 @@ public class Mediator {
 		int crosspoint = (int) (Math.random() * (contractSize - n + 1));
 		int start = crosspoint, end = crosspoint + n - 1;
 
-		//System.out.println("start: " + start + " end: " + end);
+		// System.out.println("start: " + start + " end: " + end);
 		int son[] = new int[contractSize];
 		int doughter[] = new int[contractSize];
 		int seqson[] = new int[n];
@@ -357,19 +358,19 @@ public class Mediator {
 			for (int j = 0; j < n; j++) {
 				if (papa[i] == seqson[j]) {
 					sonrepeat = true;
-					//System.out.println("sonreppeat: " + papa[i]);
+					// System.out.println("sonreppeat: " + papa[i]);
 				}
 				if (mama[i] == seqdougter[j]) {
-					//System.out.println("dourepeat: " + mama[i]);
+					// System.out.println("dourepeat: " + mama[i]);
 					dourepeat = true;
 				}
 			}
 			if (!sonrepeat) {
-				//System.out.println("sonrepeat record");
+				// System.out.println("sonrepeat record");
 				posson[soncount++] = papa[i];
 			}
 			if (!dourepeat) {
-				//System.out.println("dourepear record");
+				// System.out.println("dourepear record");
 				posdoughter[doucount++] = mama[i];
 			}
 			sonrepeat = false;
@@ -419,8 +420,8 @@ public class Mediator {
 			}
 			if (key == false) {
 				resindex[i] = rand;
-				System.out.println("value son: " + mama[resindex[i]]);
-				System.out.println("value papa: " + papa[resindex[i]]);
+				// System.out.println("value son: " + mama[resindex[i]]);
+				// System.out.println("value papa: " + papa[resindex[i]]);
 			} else {
 				i--;
 			}
@@ -510,7 +511,7 @@ public class Mediator {
 				key = false;
 			}
 		}
-		System.out.println(cycleindex);
+		// System.out.println(cycleindex);
 		Collections.sort(cycleindex);
 
 		// find not repeat index in order

@@ -4,9 +4,11 @@ import java.io.IOException;
 public class GATestRunner {
 
     public static void main(String[] args) {
-        String[] selectionMethods = {"RANK", "TOURNAMENT", "TEMPERATURE"};
-        String[] crossoverMethods = {"ORDER", "POSITION_BASED", "CYCLE"};
-        String[] mutationMethods = {"SCRAMBLE", "INVERSE", "DISPLACEMENT"};
+        // ,
+        String[] selectionMethods = { "RANK", "TOURNAMENT", "TEMPERATURE" };
+        // ,
+        String[] crossoverMethods = { "ORDER", "CYCLE", "POSITION_BASED" };
+        String[] mutationMethods = { "INVERSE", "SCRAMBLE", "DISPLACEMENT" };
 
         int combinationId = 1;
 
