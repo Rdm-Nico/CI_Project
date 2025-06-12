@@ -14,7 +14,7 @@ public class TestGA {
     static int mue = 2;
     static int lambda = 2;
     static double alpha = 0.9;
-    static String selectionMethod = "RANK";
+    static String selectionMethod = "TOURNAMENT";
     static String crossoverMethod = "CYCLE";
     static String mutationMethod = "SCRAMBLE";
 
@@ -74,10 +74,10 @@ public class TestGA {
                 int[] mama = selected_contracts[j];
                 int[] papa = selected_contracts[i];
                 int[][] offspring = applyCrossover(mediator, mama, papa, crossoverMethod, array_size);
-                System.out.println("Mama: " + Arrays.toString(mama));
-                System.out.println("Papa: " + Arrays.toString(papa));
-                System.out.println("Son: " + Arrays.toString(offspring[0]));
-                System.out.println("Daughter: " + Arrays.toString(offspring[1]));
+                // System.out.println("Mama: " + Arrays.toString(mama));
+                // System.out.println("Papa: " + Arrays.toString(papa));
+                // System.out.println("Son: " + Arrays.toString(offspring[0]));
+                // System.out.println("Daughter: " + Arrays.toString(offspring[1]));
                 // Mutation
                 int[] mutatedSon = applyMutation(mediator, offspring[0], mutationMethod, array_size);
                 int[] mutatedDaughter = applyMutation(mediator, offspring[0], mutationMethod, array_size);
@@ -112,7 +112,8 @@ public class TestGA {
 
         // save the result of the experimental
         try {
-            java.io.FileWriter writer = new java.io.FileWriter("experiment_results.csv");
+            String filename = selectionMethod + "_" + crossoverMethod + "_" + mutationMethod + ".csv";
+            java.io.FileWriter writer = new java.io.FileWriter(filename);
             // Write header
             writer.write("Round,Cost_AgentA,Cost_AgentB\n");
 
@@ -122,7 +123,7 @@ public class TestGA {
             }
 
             writer.close();
-            System.out.println("Results saved to experiment_results.csv");
+            System.out.println("Results saved to: " + filename);
         } catch (java.io.IOException e) {
             System.err.println("Error saving results: " + e.getMessage());
         }
@@ -159,7 +160,7 @@ public class TestGA {
             int selection_size, int mue, int lambda, double temparature) {
         return switch (method) {
             case "RANK" -> mediator.rank_selection(contracts, selection_size);
-            case "MUE_LAMBDA" -> mediator.mue_lamba_selection(contracts, selection_size, selection_size);
+            case "TOURNAMENT" -> mediator.tournament_selection(contracts, fitness, selection_size);
             case "TEMPERATURE" -> mediator.temperature_based_selection(contracts, fitness, selection_size, temparature);
             default -> throw new IllegalStateException("Unknown selection: " + method);
         };

@@ -220,31 +220,31 @@ public class Mediator {
 
 		}
 
-		// TODO: the selected list is not ordered based on fitness
-
 		return selected;
 	}
 
-	public int[][] mue_lamba_selection(int[][] pop_contract, int mue, int lambda) {
-		// method for do a (mue,lambda) selection of the population of contracts
-		// @return a new population of contracts
+	public int[][] tournament_selection(int[][] pop_contract, double[] fitness, int selection_size) {
+		// method for do tournament selection of the population of contracts
 
-		// set up selected population
-		int[][] selected = new int[mue][pop_contract[0].length];
+		// set up the selected population
+		int[][] selected = new int[selection_size][pop_contract[0].length];
+		for (int i = 0; i < selected.length; i++) {
+			// we select two random individual and compare the fitness of this two
+			int index = 0;
 
-		// generate lambda offsrping from parents
-		// TODO: modify with the correct implementation of crossover methods
-		int[][] offspring = new int[lambda][pop_contract[0].length];
+			// Tournement Selection for maximization!
+			int index1 = (int) (Math.random() * pop_contract.length);
+			int index2 = (int) (Math.random() * pop_contract.length);
 
-		// TODO: do fitness calculation of the offspring
+			if (fitness[index1] > fitness[index2]) {
+				index = index1;
+			} else {
+				index = index2;
+			}
 
-		// select only the best mue best offspring
-
-		// Take the first mue individuals
-		for (int i = 0; i < mue; i++) {
-			selected[i] = offspring[i].clone();
+			// save the individual in the new population
+			selected[i] = pop_contract[index];
 		}
-
 		return selected;
 	}
 
