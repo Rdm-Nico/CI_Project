@@ -612,8 +612,7 @@ public class Mediator {
 	}
 
 	// New method to generate and rank multiple contracts (David)
-	public int[][] generateRankedContract(Agent agentA, Agent agentB) {
-		final int NUM_CONTRACTS = 10;
+	public int[][] generateRankedContract(Agent agentA, Agent agentB, int NUM_CONTRACTS) {
 		int[][] contracts = new int[NUM_CONTRACTS][contractSize];
 		double[] voteScores = new double[NUM_CONTRACTS];
 		double[] fitnessScores = new double[NUM_CONTRACTS];

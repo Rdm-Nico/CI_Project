@@ -6,7 +6,7 @@ import java.util.Map;
 public class TestGA {
     // Parameter of negotiation
     static int maxRounds = 10;
-    static int contractSize = 5;
+    static int NUM_CONTRACTS = 10;
     // parameters for crossover & mutation
     static int array_size = 3;
     // parameters for selection
@@ -31,7 +31,7 @@ public class TestGA {
         Mediator mediator = new Mediator(agentA.getContractSize(), agentB.getContractSize());
 
         // Generate Ranked contracts as input for the methods
-        int[][] rankedContracts = mediator.generateRankedContract(agentA, agentB);
+        int[][] rankedContracts = mediator.generateRankedContract(agentA, agentB, NUM_CONTRACTS);
         double[] fitness = new double[rankedContracts.length];
 
         System.out.println("Top-Ranked Contracts:");
