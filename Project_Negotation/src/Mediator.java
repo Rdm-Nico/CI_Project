@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class Mediator {
@@ -246,7 +248,7 @@ public class Mediator {
 		return selected;
 	}
 
-	public int[][] temperature_based_selection(int[][] pop_contract, int[] fitness, int selection_size,
+	public int[][] temperature_based_selection(int[][] pop_contract, double[] fitness, int selection_size,
 			double temparature) {
 		// method for do a temperature based selection of the population of contracts
 		// @return a new population of contracts
@@ -593,6 +595,22 @@ public class Mediator {
 		};
 	}
 
+	// New method to calculate fitness score for a contract
+	public double calculateFitnessScore_WithdDummy(int[] contract, Agent agentA, Agent agentB, int[] dummyContract) {
+		int score = 0;
+		if (agentA.vote(dummyContract, contract))
+			score++;
+		if (agentB.vote(dummyContract, contract))
+			score++;
+
+		// Map vote count to fitness score
+		return switch (score) {
+			case 2 -> 1.0;
+			case 1 -> 0.5;
+			default -> 0.0;
+		};
+	}
+
 	// New method to generate and rank multiple contracts (David)
 	public int[][] generateRankedContract(Agent agentA, Agent agentB) {
 		final int NUM_CONTRACTS = 10;
@@ -636,7 +654,7 @@ public class Mediator {
 		return contracts;
 	}
 
-	public int[][] sorted_Contract(int[][] contracts, Agent agentA, Agent agentB) {
+	public Map<String, Object> sorted_Contract(int[][] contracts, Agent agentA, Agent agentB, int[] dummyContract) {
 		/*
 		 * Function for sort the population of contracts based on fitness
 		 */
@@ -645,7 +663,7 @@ public class Mediator {
 		double[] fitness_list = new double[contracts.length];
 
 		for (int i = 0; i < contracts.length; i++) {
-			fitness_list[i] = calculateFitnessScore(contracts[i], agentA, agentB);
+			fitness_list[i] = calculateFitnessScore_WithdDummy(contracts[i], agentA, agentB, dummyContract);
 		}
 
 		// Sort contracts based on voteScores (descending: 2 -> 1 -> 0)
@@ -664,7 +682,9 @@ public class Mediator {
 				}
 			}
 		}
-
-		return contracts;
+		Map<String, Object> result = new HashMap<>();
+		result.put("contracts", contracts);
+		result.put("fitness", fitness_list);
+		return result;
 	}
 }

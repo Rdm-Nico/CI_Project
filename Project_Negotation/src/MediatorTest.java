@@ -55,7 +55,7 @@ public class MediatorTest {
         }
 
         System.out.println("New population after selection and crossover:");
-        new_pop = mediator.sorted_Contract(new_pop, agentA, agentB);
+        // new_pop = mediator.sorted_Contract(new_pop, agentA, agentB);
         // print
         for (i = 0; i < new_pop.length; i++) {
             double fitness = mediator.calculateFitnessScore(new_pop[i], agentA, agentB);
