@@ -6,6 +6,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Negotiation",
+      "request": "launch",
+      "mainClass": "Negotiation",
+      "projectName": "CI_Project_b07df57b"
+    },
+    {
+      "type": "java",
+      "name": "Testing",
+      "request": "launch",
+      "mainClass": "Testing",
+      "projectName": "CI_Project_b07df57b"
+    },
+    {
+      "type": "java",
       "name": "GATestRunner",
       "request": "launch",
       "mainClass": "GATestRunner",
