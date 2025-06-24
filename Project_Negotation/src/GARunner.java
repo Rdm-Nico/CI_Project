@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GATestRunner {
+public class GARunner {
 
     public static void main(String[] args) {
         String[] supplierFiles = {
@@ -43,7 +43,7 @@ public class GATestRunner {
                                         + supplierLabel + " / " + customerLabel + " / "
                                         + selection + " / " + crossover + " / " + mutation);
                                 try {
-                                    double[][] result = TestGA.runExperiment(selection, crossover, mutation,
+                                    double[][] result = GenericAlgorithm.runExperiment(selection, crossover, mutation,
                                             supplierPath, customerPath);
 
                                     for (int round = 0; round < result.length; round++) {

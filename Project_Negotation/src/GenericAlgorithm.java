@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Map;
 
-public class TestGA {
+public class GenericAlgorithm {
 
     // Create Automated Testing methods
     public static double[][] runExperiment(String selectionMethod, String crossoverMethod, String mutationMethod,

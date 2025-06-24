@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.logging.Logger;
 
-import utils.Log;
+
 
 // DO NOT USE EVALUATE-FUNCTIONS OF AGENTS WITHIN MEDIATOR OR NEGOTIATION!
 // THESE OBLECTIVE-VALUES ARE NOT AVAILABLE IN REAL NEGOTIATIONS!!!!!!!!!!!!!!!!!!!!  
@@ -12,7 +12,7 @@ import utils.Log;
 public class Negotiation {
 	// Parameter of negotiation
 	public static int maxRounds = 10;
-	private static final Logger logger = new Log().InitLog();
+	//private static final Logger logger = new Log().InitLog();
 
 	public static void main(String[] args) {
 		int[] contract, proposal;
@@ -35,7 +35,7 @@ public class Negotiation {
 
 			for (int i = 0; i < inSu200.length; i++) {
 				for (int j = 0; j < inCu200.length; j++) {
-					logger.info("Instance: " + i + " " + j + "\n");
+//					logger.info("Instance: " + i + " " + j + "\n");
 					agA = new SupplierAgent(new File(inSu200[i]));
 					agB = new CustomerAdvanced(new File(inCu200[j]));
 					med = new Mediator(agA.getContractSize(), agB.getContractSize());
@@ -65,10 +65,10 @@ public class Negotiation {
 	}
 
 	public static void output(Agent a1, Agent a2, int i, int[] contract) {
-		logger.info(i + " -> ");
-		a1.printUtility(contract, logger);
-		logger.info("  ");
-		a2.printUtility(contract, logger);
-		logger.info("\n");
+//		logger.info(i + " -> ");
+//		a1.printUtility(contract, logger);
+//		logger.info("  ");
+//		a2.printUtility(contract, logger);
+//		logger.info("\n");
 	}
 }
