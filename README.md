@@ -18,6 +18,16 @@ e.g.
 ### run a specific combination of problem instances
 You can run a specific combination of istances by change the path in line 115 and 117 in `GenericAlgorithm.java` and run this time `GenericAlgorithm.java`.
 
+e.g.
+```
+        int maxRounds = 100;
+        int NUM_CONTRACTS = 100;
+        int selection_size = 50;
+        int array_size = 69;
+        double temperature = 50;
+        double alpha = 0.9;
+```
+
 ## Generate Charts 📊
 For generate the charts we use a Jupiter Nootbook that you can find in `visualization/drawDiagram.ipynb`.
 
