@@ -37,3 +37,7 @@ File customerFile = new File("Project_Negotation/data/daten3ACustomer_200_10.txt
 ## Generate Charts 📊
 
 For generate the charts we use a Jupiter Nootbook that you can find in `visualization/drawDiagram.ipynb`.
+
+
+## Documentation
+In folder `Group_Documentation` is present our group Presentation. 
